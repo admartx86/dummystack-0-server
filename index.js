@@ -1,21 +1,28 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
-const articleRouter = require("./route");
+const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const articleRouter = require('./route');
 
 dotenv.config();
 
-app.use(bodyParser.json());
 app.use(
-    bodyParser.urlencoded({
-        extended: true
-    })
+  cors({
+    origin: 'http://127.0.0.1:8080',
+  }),
 );
 
-const port = process.env.PORT || 3000
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
+
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-    console.log('Node.js listening...' + port)
-})
-app.use("articles", articleRouter);
+  console.log('Node.js listening...' + port);
+});
+app.use('/articles', articleRouter);
