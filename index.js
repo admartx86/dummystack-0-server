@@ -9,16 +9,11 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: 'http://127.0.0.1:8080',
+    origin: ['http://127.0.0.1:8080', 'http://localhost:5173'],
   }),
 );
 
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  }),
-);
+app.use(express.json());
 
 const port = process.env.PORT || 3000;
 
